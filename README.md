@@ -12,6 +12,7 @@ curl -s https://raw.githubusercontent.com/kubeup/okdc/master/okdc-centos.sh|sh
 * 重新在master执行安装流程
 * // 设置master节点可调度
 * kubectl taint nodes --all node-role.kubernetes.io/master-
+
 ##kubernetes-dashboard安装
 
 ```yaml
