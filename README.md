@@ -10,7 +10,7 @@ curl -s https://raw.githubusercontent.com/kubeup/okdc/master/okdc-centos.sh|sh
 * 如果出现node节点token验证失败，在master执行kubeadm token list 查看token，如果出现多个token
 * 执行 kubeadm reset
 * 重新在master执行安装流程
-* // 设置master节点可调度
+* # 设置master节点可调度
 * kubectl taint nodes --all node-role.kubernetes.io/master-
 
 ##kubernetes-dashboard安装
