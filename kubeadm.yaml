@@ -1,0 +1,28 @@
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+cloudProvider: external
+networking:
+  podSubnet: 10.244.0.0/16
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+nodeName: cn-beijing.i-2zecx8udy4l8uzr7kli4
+featureGates:
+  CoreDNS: true
+apiServerExtraArgs:
+  cloudProvider: external 
+controllerManagerExtraArgs:
+  cloudProvider: external
+kubernetesVersion: v1.10.0
+
+---
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: NodeConfiguration
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+nodeName: cn-beijing.i-2zeahkjrz69iq0wg1ox6
+token: q0vcwj.u0mssh8zkh1ttcaz
+discoveryTokenAPIServers:
+- 172.17.225.112:6443
+discoveryTokenCACertHashes:
+- sha256:572e54599e08d9fcc5aaf1f54312bf22f956c0f42bc9153f511b35246cefd30b
+kubernetesVersion: v1.10.0
+
+

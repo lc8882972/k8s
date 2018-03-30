@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloud-config
+  namespace: kube-system
+data:
+  access-key-id: TFRBSVBub09VakhFN1FlSg==
+  access-key-secret: dGVYMzJsNTVoUFdMNFk5SklhOFhRV2ZDMWF4U1Rx

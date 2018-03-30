@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cloud-controller-manager
+  namespace: kube-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: cloud-controller-manager
+    spec:
+      dnsPolicy: Default
+      tolerations:
+        # this taint is set by all kubelets running `--cloud-provider=external`
+        - key: "node.cloudprovider.kubernetes.io/uninitialized"
+          value: "true"
+          effect: "NoSchedule"
+      containers:
+      - image: registry.cn-hangzhou.aliyuncs.com/acs/cloud-controller-manager:v1.8.4-14-gca3c1da
+        name: cloud-controller-manager
+        command:
+          - /cloud-controller-manager
+          # set leader-elect=true if you have more that one replicas
+          - --leader-elect=false
+          - --allocate-node-cidrs=true
+          # set this to what you set to controller-manager or kube-proxy
+          - --cluster-cidr=10.244.0.0/16
+          # if you want to use a secure endpoint or deploy in a kubeadm deployed cluster, you need to use a kubeconfig instead.
+          - --master=/etc/kubernetes/admin.conf
+        env:
+          - name: ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: cloud-config
+                key: access-key-id
+          - name: ACCESS_KEY_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: cloud-config
+                key: access-key-secret
